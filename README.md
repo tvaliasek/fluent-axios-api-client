@@ -6,7 +6,7 @@ used with the Axios client library, or anything else providing compatible interf
 ## Usage
 Client assumes url scheme: `/<optional prefix>/<resource>[/<resource id>[/<subresource>[/<subresource id>]]]`
 
-But you can use it also differently, see last example.
+But you can use it also differently, see the last example.
 
 ``` ts
 import { create } from 'axios'
