@@ -22,7 +22,7 @@ const endpointsDefinition = [
         property: 'someResources',
         // optional url part of this endpoint in url, if omitted, property value is used
         urlPart: 'some-resources',
-        // optinal custom class constructor for this endpoint, extend FluentApiEndpoint class and add your methods etc.
+        // optional custom class constructor for this endpoint, extend FluentApiEndpoint class and add your methods etc.
         endpointClass: CustomEndpointClass
         // you can add subresource endpoints with the same config
         endpoints: [
