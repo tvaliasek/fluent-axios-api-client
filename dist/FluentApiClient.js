@@ -7,7 +7,7 @@ class FluentApiClient {
         this.client = client;
         const endpointProps = {};
         for (const endpoint of endpoints) {
-            const ApiEndpointClass = endpoint.apiClass ?? FluentApiEndpoint_1.FluentApiEndpoint;
+            const ApiEndpointClass = endpoint.endpointClass ?? FluentApiEndpoint_1.FluentApiEndpoint;
             if (!endpoint.property) {
                 throw new Error(`Missing or invalid "property" property on API endpoint "${JSON.stringify(endpoint)}" definition.`);
             }
@@ -17,6 +17,9 @@ class FluentApiClient {
     }
 }
 exports.FluentApiClient = FluentApiClient;
+/**
+ * Client class factory function
+ */
 function createClient(client, urlPrefix, endpoints = []) {
     return new FluentApiClient(client, urlPrefix, endpoints);
 }

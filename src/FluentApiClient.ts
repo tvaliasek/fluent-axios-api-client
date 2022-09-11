@@ -4,10 +4,22 @@ import { FluentApiEndpoint } from './FluentApiEndpoint'
 type ConstructorType<T> = new (...args : any[]) => T;
 
 export interface FluentApiEndpointConfig<T = FluentApiEndpoint> {
+    /**
+     * Under which property will be created endpoint instance
+     */
     property: string,
-    endpoints: FluentApiEndpointConfig[],
+    /**
+     * Subresource endpoints config
+     */
+    endpoints?: FluentApiEndpointConfig[],
+    /**
+     * Custom url part for this endpoint
+     */
     urlPart?: string,
-    apiClass?: ConstructorType<T>
+    /**
+     * Custom endpoint class constructor
+     */
+    endpointClass?: ConstructorType<T>
 }
 
 export class FluentApiClient {
@@ -18,7 +30,7 @@ export class FluentApiClient {
     ) {
         const endpointProps: Record<string, any> = {}
         for (const endpoint of endpoints) {
-            const ApiEndpointClass = endpoint.apiClass ?? FluentApiEndpoint
+            const ApiEndpointClass = endpoint.endpointClass ?? FluentApiEndpoint
             if (!endpoint.property) {
                 throw new Error(`Missing or invalid "property" property on API endpoint "${JSON.stringify(endpoint)}" definition.`)
             }
@@ -33,6 +45,9 @@ export class FluentApiClient {
     }
 }
 
+/**
+ * Client class factory function
+ */
 export function createClient<T = { [key: string]: FluentApiEndpoint }> (client: AxiosInstance, urlPrefix?: string, endpoints: FluentApiEndpointConfig[] = []) {
     return new FluentApiClient(client, urlPrefix, endpoints) as FluentApiClient & T
 }
