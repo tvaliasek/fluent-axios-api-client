@@ -2,7 +2,15 @@ import { AxiosInstance } from 'axios'
 import { FluentApiEndpoint } from './FluentApiEndpoint'
 
 type ConstructorType<T> = new (...args : any[]) => T;
-
+/**
+ * @export
+ * @interface FluentApiEndpointConfig
+ * @template T
+ * @property {string} property
+ * @property {FluentApiEndpointConfig[]|[]} endpoints
+ * @property {string|null} urlPart
+ * @property {FluentApiEndpoint|T} endpointClass
+ */
 export interface FluentApiEndpointConfig<T = FluentApiEndpoint> {
     /**
      * Under which property will be created endpoint instance
@@ -23,6 +31,12 @@ export interface FluentApiEndpointConfig<T = FluentApiEndpoint> {
 }
 
 export class FluentApiClient {
+    /**
+     * 
+     * @param {AxiosInstance} client 
+     * @param {string|null} urlPrefix 
+     * @param {FluentApiEndpointConfig[]} endpoints 
+     */
     constructor (
         public readonly client: AxiosInstance,
         urlPrefix?: string,
@@ -47,6 +61,13 @@ export class FluentApiClient {
 
 /**
  * Client class factory function
+ *
+ * @export
+ * @template T
+ * @param {AxiosInstance} client
+ * @param {string} [urlPrefix]
+ * @param {FluentApiEndpointConfig[]} [endpoints=[]]
+ * @returns {FluentApiClient}
  */
 export function createClient<T = { [key: string]: FluentApiEndpoint }> (client: AxiosInstance, urlPrefix?: string, endpoints: FluentApiEndpointConfig[] = []) {
     return new FluentApiClient(client, urlPrefix, endpoints) as FluentApiClient & T
