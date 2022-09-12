@@ -6,3 +6,4 @@ Object.defineProperty(exports, "createClient", { enumerable: true, get: function
 Object.defineProperty(exports, "FluentApiClient", { enumerable: true, get: function () { return FluentApiClient_1.FluentApiClient; } });
 var FluentApiEndpoint_1 = require("./FluentApiEndpoint");
 Object.defineProperty(exports, "FluentApiEndpoint", { enumerable: true, get: function () { return FluentApiEndpoint_1.FluentApiEndpoint; } });
+//# sourceMappingURL=index.js.map

@@ -51,7 +51,7 @@ export class FluentApiEndpoint extends Function {
     getEndpoints<T = { [key: string]: FluentApiEndpoint }> (id: string|number|null = null): T  {
         const endpoints: Record<string, any> = {}
         for (const endpoint of this.endpoints) {
-            const ApiEndpointClass = endpoint.endpointClass || FluentApiEndpoint
+            const ApiEndpointClass = endpoint.endpointClass ?? FluentApiEndpoint
             if (!endpoint.property) {
                 throw new Error(`Missing or invalid "property" property on API endpoint "${JSON.stringify(endpoint)}" definition.`)
             }

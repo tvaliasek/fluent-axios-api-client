@@ -38,3 +38,4 @@ function createClient(client, urlPrefix, endpoints = []) {
     return new FluentApiClient(client, urlPrefix, endpoints);
 }
 exports.createClient = createClient;
+//# sourceMappingURL=FluentApiClient.js.map

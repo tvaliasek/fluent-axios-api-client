@@ -1,7 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FluentApiEndpoint = void 0;
-class FluentApiEndpoint extends Function {
+import { FluentApiEndpointConfig } from "./FluentApiClient";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+export declare class FluentApiEndpoint extends Function {
+    readonly client: AxiosInstance;
+    readonly urlPart: string | null;
+    readonly urlPrefix: string | null;
+    readonly endpoints: FluentApiEndpointConfig[];
     /**
      * Creates an instance of FluentApiEndpoint.
      * @param {AxiosInstance} client
@@ -10,35 +13,14 @@ class FluentApiEndpoint extends Function {
      * @param {FluentApiEndpointConfig[]} [endpoints=[]]
      * @memberof FluentApiEndpoint
      */
-    constructor(client, urlPart = null, urlPrefix = null, endpoints = []) {
-        super();
-        this.client = client;
-        this.urlPart = urlPart;
-        this.urlPrefix = urlPrefix;
-        this.endpoints = endpoints;
-        return new Proxy(this, {
-            apply: (target, thisArg, args = [null]) => {
-                return target.getEndpoints(args[0]);
-            }
-        });
-    }
+    constructor(client: AxiosInstance, urlPart?: string | null, urlPrefix?: string | null, endpoints?: FluentApiEndpointConfig[]);
     /**
      * get url address without leading "/"
      * @readonly
      * @type {string}
      * @memberof FluentApiEndpoint
      */
-    get url() {
-        var _a;
-        const url = `${(_a = this.urlPrefix) !== null && _a !== void 0 ? _a : ''}/${this.urlPart}`.replace(/\/{2,}/g, '/').split('');
-        if (url[0] === '/') {
-            url[0] = '';
-        }
-        if (url[url.length - 1] === '/') {
-            url[url.length - 1] = '';
-        }
-        return url.join('');
-    }
+    get url(): string;
     /**
      * Generate subresource endpoints with prefixed url
      * @template T
@@ -46,18 +28,9 @@ class FluentApiEndpoint extends Function {
      * @returns {T}
      * @memberof FluentApiEndpoint
      */
-    getEndpoints(id = null) {
-        var _a;
-        const endpoints = {};
-        for (const endpoint of this.endpoints) {
-            const ApiEndpointClass = (_a = endpoint.endpointClass) !== null && _a !== void 0 ? _a : FluentApiEndpoint;
-            if (!endpoint.property) {
-                throw new Error(`Missing or invalid "property" property on API endpoint "${JSON.stringify(endpoint)}" definition.`);
-            }
-            endpoints[endpoint.property] = new ApiEndpointClass(this.client, endpoint.urlPart || endpoint.property, (id === null) ? this.url : `${this.url}/${id}`, endpoint.endpoints || []);
-        }
-        return endpoints;
-    }
+    getEndpoints<T = {
+        [key: string]: FluentApiEndpoint;
+    }>(id?: string | number | null): T;
     /**
      * Generic GET request
      *
@@ -67,9 +40,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doGetRequest(url, params = {}, customConfig = {}) {
-        return this.client.get(url, Object.assign({ params }, customConfig));
-    }
+    doGetRequest(url: string, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
     /**
      * Generic HEAD request
      *
@@ -79,9 +50,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doHeadRequest(url, params = {}, customConfig = {}) {
-        return this.client.head(url, Object.assign({ params }, customConfig));
-    }
+    doHeadRequest(url: string, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
     /**
      * Generic POST request
      *
@@ -92,9 +61,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doPostRequest(url, data = {}, params = {}, customConfig = {}) {
-        return this.client.post(url, data, Object.assign({ params }, customConfig));
-    }
+    doPostRequest(url: string, data?: Record<string, any>, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
     /**
      * Generic PUT request
      *
@@ -105,9 +72,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doPutRequest(url, data = {}, params = {}, customConfig = {}) {
-        return this.client.put(url, data, Object.assign({ params }, customConfig));
-    }
+    doPutRequest(url: string, data?: Record<string, any>, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
     /**
      * Generic PATCH request
      *
@@ -118,9 +83,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doPatchRequest(url, data = {}, params = {}, customConfig = {}) {
-        return this.client.patch(url, data, Object.assign({ params }, customConfig));
-    }
+    doPatchRequest(url: string, data?: Record<string, any>, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
     /**
      * Generic DELETE request
      *
@@ -130,9 +93,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doDeleteRequest(url, params = {}, customConfig = {}) {
-        return this.client.delete(url, Object.assign({ params }, customConfig));
-    }
+    doDeleteRequest(url: string, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
     /**
      * Do a GET request to retrieve all records
      *
@@ -140,9 +101,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    getAll(params = {}) {
-        return this.doGetRequest(`/${this.url}`, params);
-    }
+    getAll(params?: Record<string, any>): Promise<AxiosResponse>;
     /**
      * Do a GET request to retrieve specific record
      *
@@ -150,9 +109,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    getOne(id) {
-        return this.doGetRequest(`/${this.url}/${id}`);
-    }
+    getOne(id: string | number): Promise<AxiosResponse>;
     /**
      * Do a POST request to create record
      *
@@ -160,9 +117,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    create(dataset) {
-        return this.doPostRequest(`/${this.url}`, dataset);
-    }
+    create(dataset: Record<string, any>): Promise<AxiosResponse>;
     /**
      * Do a GET request to retrieve specific record or specific record if you specify ID parameter
      *
@@ -171,12 +126,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    read(id = null, params = {}) {
-        if (id === null) {
-            return this.getAll(params);
-        }
-        return this.getOne(id);
-    }
+    read(id?: string | number | null, params?: Record<string, any>): Promise<AxiosResponse>;
     /**
      * Do a PATCH request to update specific record
      *
@@ -185,9 +135,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    update(id, dataset) {
-        return this.doPatchRequest(`/${this.url}/${id}`, dataset);
-    }
+    update(id: string | number, dataset: Record<string, any>): Promise<AxiosResponse>;
     /**
      * Do a DELETE request to delete specific record
      *
@@ -195,9 +143,7 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    delete(id) {
-        return this.doDeleteRequest(`/${this.url}/${id}`);
-    }
+    delete(id: string | number): Promise<AxiosResponse>;
     /**
      * Do a PUT request to replace or update specific record
      *
@@ -206,9 +152,6 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    replace(id, dataset) {
-        return this.doPutRequest(`/${this.url}/${id}`, dataset);
-    }
+    replace(id: string | number, dataset: Record<string, any>): Promise<AxiosResponse>;
 }
-exports.FluentApiEndpoint = FluentApiEndpoint;
-//# sourceMappingURL=FluentApiEndpoint.js.map
+//# sourceMappingURL=FluentApiEndpoint.d.ts.map

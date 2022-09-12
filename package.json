@@ -1,6 +1,6 @@
 {
   "name": "@tvaliasek/fluent-axios-api-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple wrapper around axios library for working with REST APIs. ",
   "main": "dist/index.js",
   "module": "dist/index.js",
