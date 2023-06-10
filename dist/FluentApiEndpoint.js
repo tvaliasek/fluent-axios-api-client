@@ -150,8 +150,8 @@ class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    getOne(id) {
-        return this.doGetRequest(`/${this.url}/${id}`);
+    getOne(id, params = {}) {
+        return this.doGetRequest(`/${this.url}/${id}`, params);
     }
     /**
      * Do a POST request to create record
@@ -175,7 +175,7 @@ class FluentApiEndpoint extends Function {
         if (id === null) {
             return this.getAll(params);
         }
-        return this.getOne(id);
+        return this.getOne(id, params);
     }
     /**
      * Do a PATCH request to update specific record

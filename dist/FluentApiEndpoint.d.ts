@@ -109,7 +109,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    getOne(id: string | number): Promise<AxiosResponse>;
+    getOne(id: string | number, params?: Record<string, any>): Promise<AxiosResponse>;
     /**
      * Do a POST request to create record
      *

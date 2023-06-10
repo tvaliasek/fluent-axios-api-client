@@ -164,8 +164,8 @@ export class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    getOne (id: string|number): Promise<AxiosResponse> {
-        return this.doGetRequest(`/${this.url}/${id}`)
+    getOne (id: string|number, params: Record<string, any> = {}): Promise<AxiosResponse> {
+        return this.doGetRequest(`/${this.url}/${id}`, params)
     }
 
     /**
@@ -191,7 +191,7 @@ export class FluentApiEndpoint extends Function {
         if (id === null) {
             return this.getAll(params)
         }
-        return this.getOne(id)
+        return this.getOne(id, params)
     }
 
     /**

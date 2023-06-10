@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { FluentApiEndpoint } from './FluentApiEndpoint';
-declare type ConstructorType<T> = new (...args: any[]) => T;
+type ConstructorType<T> = new (...args: any[]) => T;
 /**
  * @export
  * @interface FluentApiEndpointConfig
