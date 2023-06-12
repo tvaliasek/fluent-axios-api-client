@@ -40,7 +40,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doGetRequest(url: string, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
+    doGetRequest<T = any>(url: string, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse<T>>;
     /**
      * Generic HEAD request
      *
@@ -50,7 +50,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doHeadRequest(url: string, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
+    doHeadRequest<T = any>(url: string, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse<T>>;
     /**
      * Generic POST request
      *
@@ -61,7 +61,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doPostRequest(url: string, data?: Record<string, any>, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
+    doPostRequest<T = any>(url: string, data?: Record<string, any>, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse<T>>;
     /**
      * Generic PUT request
      *
@@ -72,7 +72,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doPutRequest(url: string, data?: Record<string, any>, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
+    doPutRequest<T = any>(url: string, data?: Record<string, any>, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse<T>>;
     /**
      * Generic PATCH request
      *
@@ -83,7 +83,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doPatchRequest(url: string, data?: Record<string, any>, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
+    doPatchRequest<T = any>(url: string, data?: Record<string, any>, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse<T>>;
     /**
      * Generic DELETE request
      *
@@ -93,7 +93,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    doDeleteRequest(url: string, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse>;
+    doDeleteRequest<T = any>(url: string, params?: Record<string, any>, customConfig?: Partial<AxiosRequestConfig>): Promise<AxiosResponse<T>>;
     /**
      * Do a GET request to retrieve all records
      *
@@ -101,7 +101,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    getAll(params?: Record<string, any>): Promise<AxiosResponse>;
+    getAll<T = Array<Record<string, any>>>(params?: Record<string, any>): Promise<AxiosResponse<T>>;
     /**
      * Do a GET request to retrieve specific record
      *
@@ -109,7 +109,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    getOne(id: string | number, params?: Record<string, any>): Promise<AxiosResponse>;
+    getOne<T = Record<string, any>>(id: string | number, params?: Record<string, any>): Promise<AxiosResponse<T>>;
     /**
      * Do a POST request to create record
      *
@@ -117,7 +117,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    create(dataset: Record<string, any>): Promise<AxiosResponse>;
+    create<T = Record<string, any>>(dataset: Record<string, any>): Promise<AxiosResponse<T>>;
     /**
      * Do a GET request to retrieve specific record or specific record if you specify ID parameter
      *
@@ -126,7 +126,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    read(id?: string | number | null, params?: Record<string, any>): Promise<AxiosResponse>;
+    read<T = Record<string, any> | Array<Record<string, any>>>(id?: string | number | null, params?: Record<string, any>): Promise<AxiosResponse<T>>;
     /**
      * Do a PATCH request to update specific record
      *
@@ -135,7 +135,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    update(id: string | number, dataset: Record<string, any>): Promise<AxiosResponse>;
+    update<T = Record<string, any>>(id: string | number, dataset: Record<string, any>): Promise<AxiosResponse<T>>;
     /**
      * Do a DELETE request to delete specific record
      *
@@ -143,7 +143,7 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    delete(id: string | number): Promise<AxiosResponse>;
+    delete<T = Record<string, any>>(id: string | number): Promise<AxiosResponse<T>>;
     /**
      * Do a PUT request to replace or update specific record
      *
@@ -152,6 +152,6 @@ export declare class FluentApiEndpoint extends Function {
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    replace(id: string | number, dataset: Record<string, any>): Promise<AxiosResponse>;
+    replace<T = Record<string, any>>(id: string | number, dataset: Record<string, any>): Promise<AxiosResponse<T>>;
 }
 //# sourceMappingURL=FluentApiEndpoint.d.ts.map
