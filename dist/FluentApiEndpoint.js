@@ -157,10 +157,11 @@ class FluentApiEndpoint extends Function {
      * Do a POST request to create record
      *
      * @param {Record<string, any>} dataset
+     * @param {Record<string, any>} [params={}]
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    create(dataset) {
+    create(dataset, params = {}) {
         return this.doPostRequest(`/${this.url}`, dataset);
     }
     /**
@@ -182,32 +183,35 @@ class FluentApiEndpoint extends Function {
      *
      * @param {(string|number)} id
      * @param {Record<string, any>} dataset
+     * @param {Record<string, any>} [params={}]
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    update(id, dataset) {
+    update(id, dataset, params = {}) {
         return this.doPatchRequest(`/${this.url}/${id}`, dataset);
     }
     /**
      * Do a DELETE request to delete specific record
      *
      * @param {(string|number)} id
+     * @param {Record<string, any>} [params={}]
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    delete(id) {
-        return this.doDeleteRequest(`/${this.url}/${id}`);
+    delete(id, params = {}) {
+        return this.doDeleteRequest(`/${this.url}/${id}`, params);
     }
     /**
      * Do a PUT request to replace or update specific record
      *
      * @param {(string|number)} id
      * @param {Record<string, any>} dataset
+     * @param {Record<string, any>} [params={}]
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    replace(id, dataset) {
-        return this.doPutRequest(`/${this.url}/${id}`, dataset);
+    replace(id, dataset, params = {}) {
+        return this.doPutRequest(`/${this.url}/${id}`, dataset, params);
     }
 }
 exports.FluentApiEndpoint = FluentApiEndpoint;

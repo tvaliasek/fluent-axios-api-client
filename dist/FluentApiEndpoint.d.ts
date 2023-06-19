@@ -114,10 +114,11 @@ export declare class FluentApiEndpoint extends Function {
      * Do a POST request to create record
      *
      * @param {Record<string, any>} dataset
+     * @param {Record<string, any>} [params={}]
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    create<T = Record<string, any>>(dataset: Record<string, any>): Promise<AxiosResponse<T>>;
+    create<T = Record<string, any>>(dataset: Record<string, any>, params?: Record<string, any>): Promise<AxiosResponse<T>>;
     /**
      * Do a GET request to retrieve specific record or specific record if you specify ID parameter
      *
@@ -132,26 +133,29 @@ export declare class FluentApiEndpoint extends Function {
      *
      * @param {(string|number)} id
      * @param {Record<string, any>} dataset
+     * @param {Record<string, any>} [params={}]
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    update<T = Record<string, any>>(id: string | number, dataset: Record<string, any>): Promise<AxiosResponse<T>>;
+    update<T = Record<string, any>>(id: string | number, dataset: Record<string, any>, params?: Record<string, any>): Promise<AxiosResponse<T>>;
     /**
      * Do a DELETE request to delete specific record
      *
      * @param {(string|number)} id
+     * @param {Record<string, any>} [params={}]
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    delete<T = Record<string, any>>(id: string | number): Promise<AxiosResponse<T>>;
+    delete<T = Record<string, any>>(id: string | number, params?: Record<string, any>): Promise<AxiosResponse<T>>;
     /**
      * Do a PUT request to replace or update specific record
      *
      * @param {(string|number)} id
      * @param {Record<string, any>} dataset
+     * @param {Record<string, any>} [params={}]
      * @returns {Promise<AxiosResponse>}
      * @memberof FluentApiEndpoint
      */
-    replace<T = Record<string, any>>(id: string | number, dataset: Record<string, any>): Promise<AxiosResponse<T>>;
+    replace<T = Record<string, any>>(id: string | number, dataset: Record<string, any>, params?: Record<string, any>): Promise<AxiosResponse<T>>;
 }
 //# sourceMappingURL=FluentApiEndpoint.d.ts.map
