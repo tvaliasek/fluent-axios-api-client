@@ -177,7 +177,7 @@ export class FluentApiEndpoint extends Function {
      * @memberof FluentApiEndpoint
      */
     create<T = Record<string, any>> (dataset: Record<string, any>, params: Record<string, any> = {}): Promise<AxiosResponse<T>> {
-        return this.doPostRequest(`/${this.url}`, dataset)
+        return this.doPostRequest(`/${this.url}`, dataset, params)
     }
 
     /**
