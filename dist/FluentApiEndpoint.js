@@ -162,7 +162,7 @@ class FluentApiEndpoint extends Function {
      * @memberof FluentApiEndpoint
      */
     create(dataset, params = {}) {
-        return this.doPostRequest(`/${this.url}`, dataset);
+        return this.doPostRequest(`/${this.url}`, dataset, params);
     }
     /**
      * Do a GET request to retrieve specific record or specific record if you specify ID parameter
